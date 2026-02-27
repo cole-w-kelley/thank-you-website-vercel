@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You to Our Donors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: 
+                linear-gradient(180deg, #1a0f0a 0%, #0d0805 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 60px 20px;
+            color: #f4e5c2;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(101, 67, 33, 0.1) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(26, 15, 10, 0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            padding: 70px 50px;
+            box-shadow: 
+                0 0 60px rgba(212, 175, 55, 0.15),
+                inset 0 0 100px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+        }
+        
+        .script-accent {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 3.2rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #f4e5c2;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #c9b896;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        
+        .total-raised {
+            text-align: center;
+            margin: 50px 0 60px 0;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(139, 105, 20, 0.1) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .total-raised::before,
+        .total-raised::after {
+            content: '◆';
+            position: absolute;
+            color: #d4af37;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+        
+        .total-raised::before {
+            top: 10px;
+            left: 15px;
+        }
+        
+        .total-raised::after {
+            bottom: 10px;
+            right: 15px;
+        }
+        
+        .total-label {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+        
+        .total-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: #f4e5c2;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .donors-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1em;
+            align-items: baseline;
+            padding: 1.5em 0;
+        }
+        
+        .donor {
+            display: inline-block;
+            padding: 0.6em 1.4em;
+            background: linear-gradient(135deg, #daa520 0%, #b8860b 50%, #8b6914 100%);
+            border: 1px solid #654a0a;
+            border-radius: 50px;
+            color: #1a0f0a;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+            box-shadow: 
+                0 4px 15px rgba(212, 175, 55, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .donor::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                110deg,
+                transparent 40%,
+                rgba(255, 235, 180, 0.4) 48%,
+                rgba(255, 250, 220, 0.6) 50%,
+                rgba(255, 235, 180, 0.4) 52%,
+                transparent 60%
+            );
+            animation: shimmerWave 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes shimmerWave {
+            0%, 37.5% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            43.75% {
+                opacity: 1;
+            }
+            56.25% {
+                transform: translateX(50%);
+                opacity: 1;
+            }
+            62.5%, 100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        .donor:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 8px 30px rgba(212, 175, 55, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #e6c35c 0%, #daa520 50%, #b8860b 100%);
+            border-color: #4a3508;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.5);
+        }
+        
+        .footer-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: #d4af37;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 30px 15px;
+            }
+            
+            .container {
+                padding: 40px 25px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+                letter-spacing: 0.1em;
+            }
+            
+            .script-accent {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .total-amount {
+                font-size: 2.5rem;
+            }
+            
+            .total-label {
+                font-size: 1.6rem;
+            }
+            
+            .donors-grid {
+                gap: 0.8em;
+            }
+            
+            .donor {
+                padding: 0.5em 1.1em;
+            }
+            
+            .footer-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="script-accent">With heartfelt gratitude</div>
+            <h1>Thank You</h1>
+            <p class="subtitle">To our generous supporters who made this possible</p>
+        </div>
+        
+        <div class="total-raised">
+            <div class="total-label">Total Contributions</div>
+            <div class="total-amount">$648.00</div>
+        </div>
+        
+        <div class="donors-grid">
+            <!-- $55 - Cole Kelley -->
+            <div class="donor" style="font-size: 2.2rem; font-weight: 500;">Cole Kelley</div>
+            
+            <!-- $50 - Pierce Miller -->
+            <div class="donor" style="font-size: 2.1rem; font-weight: 500;">Pierce Miller</div>
+            
+            <!-- $40 - Quin Miller -->
+            <div class="donor" style="font-size: 1.9rem; font-weight: 500;">Quin Miller</div>
+            
+            <!-- $30 - Nicolas Prescott -->
+            <div class="donor" style="font-size: 1.8rem; font-weight: 500;">Nicolas Prescott</div>
+            
+            <!-- $25 - Jackson Beals -->
+            <div class="donor" style="font-size: 1.7rem; font-weight: 500;">Jackson Beals</div>
+            
+            <!-- $24 - Ben Washburn -->
+            <div class="donor" style="font-size: 1.65rem; font-weight: 500;">Ben Washburn</div>
+            
+            <!-- $20 donors alphabetically -->
+            <div class="donor" style="font-size: 1.6rem;">Abby McLelland</div>
+            <div class="donor" style="font-size: 1.6rem;">Charlie Altman</div>
+            <div class="donor" style="font-size: 1.6rem;">Felipe Angel</div>
+            <div class="donor" style="font-size: 1.6rem;">Jay Roy</div>
+            <div class="donor" style="font-size: 1.6rem;">Patrick Wentworth</div>
+            <div class="donor" style="font-size: 1.6rem;">Rebecca Schock</div>
+            <div class="donor" style="font-size: 1.6rem;">Wessely Alaham</div>
+            
+            <!-- $10 donors alphabetically -->
+            <div class="donor" style="font-size: 1.45rem;">Ben Dire</div>
+            <div class="donor" style="font-size: 1.45rem;">Brendan Mitchell</div>
+            <div class="donor" style="font-size: 1.45rem;">Charlotte Cole</div>
+            <div class="donor" style="font-size: 1.45rem;">Chloe Byrnes</div>
+            <div class="donor" style="font-size: 1.45rem;">Clara Steinmetz</div>
+            <div class="donor" style="font-size: 1.45rem;">Dulce Nava</div>
+            <div class="donor" style="font-size: 1.45rem;">Elise Jurkovic</div>
+            <div class="donor" style="font-size: 1.45rem;">Evan Sims</div>
+            <div class="donor" style="font-size: 1.45rem;">Grace Cowan</div>
+            <div class="donor" style="font-size: 1.45rem;">Hudson Markin</div>
+            <div class="donor" style="font-size: 1.45rem;">Ian Zalamea</div>
+            <div class="donor" style="font-size: 1.45rem;">Isabella Dini</div>
+            <div class="donor" style="font-size: 1.45rem;">Joshua Dsouza</div>
+            <div class="donor" style="font-size: 1.45rem;">Landon McClellan</div>
+            <div class="donor" style="font-size: 1.45rem;">Lucas Kennerson</div>
+            <div class="donor" style="font-size: 1.45rem;">Marcus Rampin</div>
+            <div class="donor" style="font-size: 1.45rem;">Maxwell R</div>
+            <div class="donor" style="font-size: 1.45rem;">Nick Pucci</div>
+            <div class="donor" style="font-size: 1.45rem;">Patrick Wrona</div>
+            <div class="donor" style="font-size: 1.45rem;">Sarah Weekers</div>
+            <div class="donor" style="font-size: 1.45rem;">Thomas Koska</div>
+            
+            <!-- $7 - Liz Koratich -->
+            <div class="donor" style="font-size: 1.35rem;">Liz Koratich</div>
+            
+            <!-- $6 donors alphabetically -->
+            <div class="donor" style="font-size: 1.3rem;">Nora Sammons</div>
+            <div class="donor" style="font-size: 1.3rem;">Thomas Hughes</div>
+            
+            <!-- $5 donors alphabetically -->
+            <div class="donor" style="font-size: 1.25rem;">Brycen Buffington</div>
+            <div class="donor" style="font-size: 1.25rem;">Evan Gragg</div>
+            <div class="donor" style="font-size: 1.25rem;">Genesis Rodrigues</div>
+            <div class="donor" style="font-size: 1.25rem;">Lil Zach</div>
+            <div class="donor" style="font-size: 1.25rem;">Logan Millet</div>
+            <div class="donor" style="font-size: 1.25rem;">Matthew Heidenriech</div>
+            <div class="donor" style="font-size: 1.25rem;">Mia Uribe</div>
+            <div class="donor" style="font-size: 1.25rem;">Morgan Gaudet</div>
+            <div class="donor" style="font-size: 1.25rem;">Sam Rodgers</div>
+            <div class="donor" style="font-size: 1.25rem;">Will Bertani</div>
+            <div class="donor" style="font-size: 1.25rem;">Zachary Erickson</div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-text">With sincere appreciation</div>
+        </div>
+    </div>
+</body>
+</html>
